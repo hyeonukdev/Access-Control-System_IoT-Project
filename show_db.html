@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>History</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            font-family: 12px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #dadada;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>출입시간</th>
+                <th>허가여부</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $jb_conn = mysqli_connect( '192.168.0.5', 'root', '0000', 'iotDB' );
+                $jb_sql = "SELECT * FROM access";
+                $jb_result = mysqli_query( $jb_conn, $jb_sql );
+                while( $jb_row = mysqli_fetch_array( $jb_result ) ) {
+                    echo '<tr><td>' . $jb_row[ 'time' ] . '</td><td>'. $jb_row[ 'permit' ] . '</td></tr>';
+                }
+            ?>
+        </tbody>
+    </table>
+</body>
+
+</html>
